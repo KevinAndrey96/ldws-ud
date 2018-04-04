@@ -1,10 +1,11 @@
 <?php
-
-class GestionUsuarioController extends ControllerBase
+use Phalcon\Flash;
+use Phalcon\Session;
+class SolicitudController extends ControllerBase
 {
     public function initialize()
     {
-        $this->tag->setTitle('Gestión de Usuario');
+        $this->tag->setTitle('Solicitud');
         parent::initialize();
     }
 
