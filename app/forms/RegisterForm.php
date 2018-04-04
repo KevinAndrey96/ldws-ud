@@ -65,5 +65,16 @@ class RegisterForm extends Form
             ])
         ]);
         $this->add($repeatPassword);
+
+        // Telefono
+        $phone_number = new Text('phone_number');
+        $phone_number->setLabel('Número de contacto');
+        $phone_number->setFilters(['striptags', 'string']);
+        $phone_number->addValidators([
+            new PresenceOf([
+                'message' => 'Número de telefono requerido'
+            ])
+        ]);
+        $this->add($phone_number);
     }
 }
