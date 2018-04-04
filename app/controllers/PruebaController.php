@@ -1,11 +1,10 @@
 <?php
-use Phalcon\Flash;
-use Phalcon\Session;
-class SolicitudController extends ControllerBase
+
+class PruebaController extends ControllerBase
 {
     public function initialize()
     {
-        $this->tag->setTitle('Solicitud');
+        $this->tag->setTitle('Prueba');
         parent::initialize();
     }
 
