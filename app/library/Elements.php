@@ -23,6 +23,10 @@ class Elements extends Component
                 'caption' => 'Solicitud',
                 'action' => 'index'
             ],
+            'prueba' => [
+                'caption' => 'Prueba',
+                'action' => 'index'
+            ],
             'contact' => [
                 'caption' => 'Contact',
                 'action' => 'index'
