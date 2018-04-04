@@ -31,19 +31,19 @@ class Elements extends Component
                 'caption' => 'Contact',
                 'action' => 'index'
             ],
-            'GestiónUsuario' => [
+            'gestionusuario' => [
                 'caption' => 'Gestión de Usuario',
-                'action' => ''
+                'action' => 'index'
             ],
-            'GestiónSolicitudes' => [
+            'gestionsolicitudes' => [
                 'caption' => 'Gestión de Solicitudes',
                 'action' => ''
             ],
-            'GestiónEquipos' => [
+            'gestionequipos' => [
                 'caption' => 'Gestión de Equipos',
                 'action' => ''
             ],
-            'VerReportes' => [
+            'verreportes' => [
                 'caption' => 'Ver Reportes',
                 'action' => ''
             ],
@@ -100,6 +100,10 @@ class Elements extends Component
             ];
         } else {
             unset($this->_headerMenu['navbar-left']['invoices']);
+            unset($this->_headerMenu['navbar-left']['gestionusuario']);
+            unset($this->_headerMenu['navbar-left']['gestionsolicitudes']);
+            unset($this->_headerMenu['navbar-left']['gestionequipos']);
+            unset($this->_headerMenu['navbar-left']['verreportes']);
         }
 
         $controllerName = $this->view->getControllerName();
