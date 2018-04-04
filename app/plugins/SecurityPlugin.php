@@ -50,7 +50,7 @@ class SecurityPlugin extends Plugin
 				'products'     => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
 				'producttypes' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
 				'invoices'     => ['index', 'profile'],
-				'solicitud'    => ['index']
+				'solicitud'      => ['index', 'solicitud']
 			];
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
@@ -59,12 +59,12 @@ class SecurityPlugin extends Plugin
 			//Public area resources
 			$publicResources = [
 				'index'      => ['index'],
-				'about'      => ['index'],
 				'register'   => ['index'],
 				'errors'     => ['show401', 'show404', 'show500'],
 				'session'    => ['index', 'register', 'start', 'end'],
 				'contact'    => ['index', 'send'],
-				'book' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete']
+				'book' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
+				'solicitud'    => ['index']
 			];
 			foreach ($publicResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
