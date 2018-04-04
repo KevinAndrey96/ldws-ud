@@ -19,13 +19,29 @@ class Elements extends Component
                 'caption' => 'Invoices',
                 'action' => 'index'
             ],
-            'about' => [
-                'caption' => 'About',
+            'solicitud' => [
+                'caption' => 'Solicitud',
                 'action' => 'index'
             ],
             'contact' => [
                 'caption' => 'Contact',
                 'action' => 'index'
+            ],
+            'GestiónUsuario' => [
+                'caption' => 'Gestión de Usuario',
+                'action' => ''
+            ],
+            'GestiónSolicitudes' => [
+                'caption' => 'Gestión de Solicitudes',
+                'action' => ''
+            ],
+            'GestiónEquipos' => [
+                'caption' => 'Gestión de Equipos',
+                'action' => ''
+            ],
+            'VerReportes' => [
+                'caption' => 'Ver Reportes',
+                'action' => ''
             ],
         ],
         'navbar-right' => [
