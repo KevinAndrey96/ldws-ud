@@ -51,6 +51,7 @@ class SecurityPlugin extends Plugin
 				'producttypes' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
 				'invoices'     => ['index', 'profile'],
 				'solicitud'      => ['index', 'solicitud'],
+				'empresa'      => ['index', 'empresa', 'new'],
 				'prueba'      => ['index']
 			];
 			foreach ($privateResources as $resource => $actions) {
