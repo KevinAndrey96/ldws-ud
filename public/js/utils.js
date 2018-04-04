@@ -45,6 +45,9 @@ var SignUp = {
         if (SignUp.check("password") == false) {
             return false;
         }
+        if (SignUp.check("phone_number_alert") == false) {
+            return false;
+        }
         if ($("#password")[0].value != $("#repeatPassword")[0].value) {
             $("#repeatPassword")[0].focus();
             $("#repeatPassword_alert").show();

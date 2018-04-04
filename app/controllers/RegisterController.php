@@ -27,6 +27,7 @@ class RegisterController extends ControllerBase
             $email = $this->request->getPost('email', 'email');
             $password = $this->request->getPost('password');
             $repeatPassword = $this->request->getPost('repeatPassword');
+            $phone_number = $this->request->getPost('phone_number');
 
             if ($password != $repeatPassword) {
                 $this->flash->error('Passwords are different');
@@ -39,6 +40,9 @@ class RegisterController extends ControllerBase
             $user->name = $name;
             $user->email = $email;
             $user->created_at = new Phalcon\Db\RawValue('now()');
+            $user->updated_at = new Phalcon\Db\RawValue('now()');
+            $user->telefono = $phone_number;
+            $user->rol_idrol = 2;
             $user->active = 'Y';
             if ($user->save() == false) {
                 foreach ($user->getMessages() as $message) {
