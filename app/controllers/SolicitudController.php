@@ -1,5 +1,6 @@
 <?php
-
+use Phalcon\Flash;
+use Phalcon\Session;
 class SolicitudController extends ControllerBase
 {
     public function initialize()
