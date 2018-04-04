@@ -16,19 +16,19 @@ Bienvenido al módulo de solicitudes, aquí podrá iniciar el proceso de solicit
 	<input class="form-control" type="text" placeholder="Empresa" name="">
 
 	<label>Misión</label>
-	<textarea class="form-control"></textarea>
+	<textarea class="form-control" placeholder="Misión" ></textarea>
 
 	<label>Visión</label>
-	<textarea class="form-control"></textarea>
+	<textarea class="form-control" placeholder="Visión" ></textarea>
 
 	<label>Objetivos de la solicitud</label>
-	<textarea class="form-control"></textarea>
+	<textarea class="form-control" placeholder="Objetivos" ></textarea>
 
 	<label>Observaciones</label>
-	<textarea class="form-control"></textarea>
+	<textarea class="form-control" placeholder="Observaciones" ></textarea>
 
 	<label>Servicios necesarios</label>
-	<select class="form-control">
+	<select class="form-control" placeholder="Servicios Necesarios" >
 		<option></option>
 	</select>
 	
