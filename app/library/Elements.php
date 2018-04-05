@@ -19,10 +19,6 @@ class Elements extends Component
                 'caption' => 'Invoices',
                 'action' => 'index'
             ],
-            'solicitud' => [
-                'caption' => 'Solicitud',
-                'action' => 'index'
-            ],
             'prueba' => [
                 'caption' => 'Prueba',
                 'action' => 'index'
@@ -32,10 +28,10 @@ class Elements extends Component
                 'action' => 'index'
             ],
             'gestionusuario' => [
-                'caption' => 'Gestión de Usuario',
+                'caption' => 'Solicitude',
                 'action' => 'index'
             ],
-            'gestionsolicitudes' => [
+            'gestionsolicitud' => [
                 'caption' => 'Gestión de Solicitudes',
                 'action' => 'index'
             ],
@@ -61,6 +57,11 @@ class Elements extends Component
             'controller' => 'invoices',
             'action' => 'index',
             'any' => false
+        ],
+        'Solicitudes' => [
+                'controller' => 'gestionsolicitud',
+                'action' => 'index',
+                'any' => false
         ],
         'Companies' => [
             'controller' => 'companies',
@@ -101,7 +102,7 @@ class Elements extends Component
         } else {
             unset($this->_headerMenu['navbar-left']['invoices']);
             unset($this->_headerMenu['navbar-left']['gestionusuario']);
-            unset($this->_headerMenu['navbar-left']['gestionsolicitudes']);
+            unset($this->_headerMenu['navbar-left']['gestionsolicitud']);
             unset($this->_headerMenu['navbar-left']['gestionequipos']);
             unset($this->_headerMenu['navbar-left']['verreportes']);
         }
@@ -133,6 +134,7 @@ class Elements extends Component
         $controllerName = $this->view->getControllerName();
         $actionName = $this->view->getActionName();
         echo '<ul class="nav nav-tabs">';
+
         foreach ($this->_tabs as $caption => $option) {
             if ($option['controller'] == $controllerName && ($option['action'] == $actionName || $option['any'])) {
                 echo '<li class="active">';
