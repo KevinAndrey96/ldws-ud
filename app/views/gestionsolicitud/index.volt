@@ -6,8 +6,8 @@
             <td>Codigo Solicitud</td>
             <td>Descripcion</td>
             <td>Observacion</td>
-            <td>M</td>
-            <td>E</td>
+            <!--<td>M</td>
+            <td>E</td>-->
         </tr>
     </thead>
     <tbody>
@@ -19,8 +19,8 @@
                     <td>{{ item.Solicitud }}</td>
                     <td>{{ item.Descripcion }}</td>
                     <td>{{ item.Observaciones }}</td>
-                    <td align="right"><input type="checkbox"></td>
-                    <td align="right"><input type="checkbox"></td>  
+                    <!--<td align="right"><input type="checkbox"></td>
+                    <td align="right"><input type="checkbox"></td> --> 
                 </tr>          
             {% endfor %}                
         {% endif %}
