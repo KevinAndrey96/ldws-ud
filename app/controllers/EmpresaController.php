@@ -51,15 +51,8 @@ class EmpresaController extends ControllerBase
                     $this->flash->error((string) $message);
                 }
             } else {
-               
                 $this->flash->success('La empresa se ha registrado satisfactoriamente');
-
-                return $this->dispatcher->forward(
-                    [
-                        "controller" => "session",
-                        "action"     => "index",
-                    ]
-                );
+                return $this->response->redirect("gestionsolicitud/new");
             }
             
         }
@@ -110,6 +103,50 @@ class EmpresaController extends ControllerBase
                 $this->flash->success('Se ha registrado el piso satisfactoriamente');
 
                 return $this->response->redirect("empresa/newpiso");
+            }
+        }
+    }
+
+    public function newLogicoAction()
+    {
+        if ($this->request->isPost()) {
+
+            $Redundancia = $this->request->getPost('redundancia');
+            $Escalabilidad = $this->request->getPost('escalabilidad');
+            $Subredes = $this->request->getPost('subredes');
+            $Descripcion = $this->request->getPost('desc');
+            $Scripts = $this->request->getPost('script');
+            $TablaIP = $this->request->getPost('ip');
+            $Solicitud = 1;
+
+            $logico = new Logico();
+            $logico->id_solicitud = $Solicitud;
+            $logico->escalabilidad = $Escalabilidad;
+            $logico->subredes = $Subredes;
+            $logico->desc_subred = $Descripcion;
+
+            if ($Redundancia == 'on') {
+                $logico->redundancia = 1;
+            } else {
+                $logico->redundancia = 0;
+            }
+            if ($Scripts == 'on') {
+                $logico->scripts = 1;
+            } else {
+                $logico->scripts = 0;
+            }
+            if ($TablaIP == 'on') {
+                $logico->tabla_dirip = 1;
+            } else {
+                $logico->tabla_dirip = 0;
+            }
+            
+            if ($logico->save() == false) {
+                $this->flash->error('No se ha podido la informacion satisfactoriamente');
+            } else {
+                $this->flash->success('Se ha registrado la informacion satisfactoriamente');
+
+                return $this->response->redirect("empresa/newlogico");
             }
         }
     }

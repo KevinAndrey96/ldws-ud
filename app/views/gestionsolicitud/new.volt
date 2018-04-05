@@ -7,7 +7,7 @@ Bienvenido al módulo de solicitudes, aquí podrá iniciar el proceso de solicit
 </p>
 {{ form("gestionsolicitud/new", "method":"post") }}
 	<label>Empresa</label><br>
-	{{ select("empresa", empresa, "using":["IdEmpresa", "Nombre"]) }}
+	{{ select("empresa", empresa, "using":["IdEmpresa", "Nombre"], "class":"form-control") }}
 	<br>
 
 	<label>Descripción</label>

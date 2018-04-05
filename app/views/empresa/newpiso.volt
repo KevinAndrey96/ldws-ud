@@ -1,14 +1,13 @@
 <div class="page-header">
-    <h2>Fisico</h2>
+    <h2>Fisíco</h2>
 </div>
 
 <p>
-Por favor ingrese los datos para el registro fisico de su empresa
+Por favor ingrese los datos para el registro fisíco de su empresa
 </p>
 {{ form("empresa/newpiso", "method":"post") }}
 	<label>Empresa</label><br>
-	{{ select("empresa", empresa, "using":["IdEmpresa", "Nombre"]) }}
-	<br>
+	{{ select("empresa", empresa, "using":["IdEmpresa", "Nombre"], "class":"form-control") }}
 
 	<label>Alto</label>
 	<input class="form-control" type="text" placeholder="Alto" name="alto" required="">
@@ -27,6 +26,13 @@ Por favor ingrese los datos para el registro fisico de su empresa
 	<input type="checkbox" placeholder="sala" name="sala">
 
 	<br>
-	<center>{{ submit_button("Agregar piso", "class": "btn btn-success") }}</center>
+	<div class="row">
+		<div class="col-md-6"><center>{{ submit_button("Agregar piso", "class": "btn btn-success") }}</center></div>
+		<div class="col-md-6"><center>
+			<a href="{{ url('empresa/newlogico') }}"><input class="btn btn-success" type="button" value="Continuar"/></a></center>
+		</div>
+	</div>
+	
+	
 {{ end_form() }}
 
