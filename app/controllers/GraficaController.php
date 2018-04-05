@@ -21,7 +21,7 @@ class GraficaController extends ControllerBase
                 "order" => "id DESC"
             ));*/
         $num=1;
-        //$this->view->datos = $data;
+        $this->view->num = $num;
     }
 
 }
