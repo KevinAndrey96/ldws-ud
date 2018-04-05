@@ -1,24 +1,30 @@
-<div class="page-header">
-    <h2>Empresa</h2>
+<h2 align="center">Empresas</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Visión</td>
+            <td>Misión</td>
+            <td>Nit</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% if datos is empty %}
+
+        {% else %}
+            {% for item in datos %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.vision }}</td>
+                    <td>{{ item.mision }}</td>
+                    <td>{{ item.nit }}</td>  
+                </tr>          
+            {% endfor %}                
+        {% endif %}
+    </tbody>
+</table>
+
+<div align="right">
+    {{ link_to("empresa/new", "Crear", "class": "btn btn-success") }}
 </div>
-
-<p>
-Por favor ingrese los datos para el registro de su empresa
-</p>
-{{ form("empresa/new", "method":"post") }}
-	
-	<label>Nombre</label>
-	<input class="form-control" type="text" placeholder="Empresa" name="Nombre">
-
-	<label>Nit</label>
-	<input type="number" placeholder="Nit" class="form-control" name="Nit">
-
-	<label>Misión</label>
-	<textarea class="form-control" placeholder="Misión" name="Mision"></textarea>
-
-	<label>Visión</label>
-	<textarea class="form-control" placeholder="Visión" name="Vision" ></textarea>
-
-	<br>
-	<center><input type="submit" class="btn btn-default"></center>
-{{ end_form() }}

@@ -31,6 +31,8 @@ class GestionSolicitudController extends ControllerBase
 
     public function newAction()
     {
+        $this->view->empresa = Empresas::find();
+        
         if ($this->request->isPost()) {
         	$post = $this->request->getPost();
 

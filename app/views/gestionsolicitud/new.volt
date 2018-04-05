@@ -6,8 +6,9 @@
 Bienvenido al módulo de solicitudes, aquí podrá iniciar el proceso de solicitud para su empresa
 </p>
 {{ form("gestionsolicitud/new", "method":"post") }}
-	<label>Codigo empresa</label>
-	<input type="text" placeholder="Codigo de la empresa"  class="form-control" name="empresa">
+	<label>Empresa</label><br>
+	{{ select("empresa", empresa, "using":["IdEmpresa", "Nombre"]) }}
+	<br>
 
 	<label>Descripción</label>
 	<textarea class="form-control" placeholder="Descripción" name="desc"></textarea>
