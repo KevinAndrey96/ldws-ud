@@ -1,24 +1,24 @@
 <div class="page-header">
-    <h2>Gráfica</h2>
+
 </div>
 
 <p>
 
 </p>
 
-<div class="row container">
+<div class="container">
 {{ image("images/pison.png", "class":"img-responsive") }}
 <div class="centered"><button class="btn btn-info">Ver piso</button></div>
 </div>
-<div class="row container">
+<div class="container">
 {{ image("images/pison.png", "class":"img-responsive") }}
 <div class="centered"><button class="btn btn-info">Ver piso</button></div>
 </div>
-<div class="row container">
+<div class="container">
 {{ image("images/pison.png", "class":"img-responsive") }}
 <div class="centered"><button class="btn btn-info">Ver piso</button></div>
 </div>
-<div class="row container">
+<div class="container">
 {{ image("images/piso1.png", "class":"img-responsive") }}
 <div class="centered"><button class="btn btn-info">Ver piso</button></div>
 </div>
