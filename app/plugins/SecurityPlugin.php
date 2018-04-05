@@ -50,7 +50,8 @@ class SecurityPlugin extends Plugin
 				'products'     => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
 				'producttypes' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
 				'invoices'     => ['index', 'profile'],
-				'prueba'      => ['index'],
+				'solicitud'      => ['index', 'solicitud'],
+				'empresa'      => ['index', 'empresa', 'new'],
 				'gestionusuario' => ['index', 'new'],
 				'gestionsolicitud' => ['index', 'new']
 			];

@@ -28,7 +28,7 @@ class Elements extends Component
                 'action' => 'index'
             ],
             'gestionusuario' => [
-                'caption' => 'Solicitude',
+                'caption' => 'Gestión de Usuarios',
                 'action' => 'index'
             ],
             'gestionsolicitud' => [
