@@ -1,3 +1,12 @@
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous">{{ link_to("empresa", "Volver") }}</li>
+        </ul>
+    </nav>
+</div>
+
+
 <div class="page-header">
     <h2>Empresa</h2>
 </div>

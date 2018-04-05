@@ -50,9 +50,16 @@ class SessionController extends ControllerBase
                 'bind' => ['email' => $email, 'password' => sha1($password)]
             ]);
             if ($user != false) {
-                $this->_registerSession($user);
-                $this->flash->success('Bienvenido ' . $user->name);
+                
+                $this->session->set("auth", array(
+                    'id' => $user->id,
+                    'name' => $user->name
+                ));
 
+                $this->session->set("name", $user->name);
+                $this->session->set("id", $user->id);
+                $this->flash->success('Bienvenido ' . $this->session->get("name"));
+                                ; 
                 return $this->dispatcher->forward(
                     [
                         "controller" => "invoices",

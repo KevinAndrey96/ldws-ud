@@ -1,3 +1,11 @@
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous">{{ link_to("index", "Volver") }}</li>
+        </ul>
+    </nav>
+</div>
+
 <h2 align="center">Empresas</h2>
 
 <table class="table table-bordered table-striped">

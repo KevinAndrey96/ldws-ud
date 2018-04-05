@@ -11,7 +11,11 @@ class EmpresaController extends ControllerBase
 
     public function indexAction()
     {
-        $empresa = Empresas::find();
+        //$empresa = Empresas::find();
+        $empresa = Empresas::find(array(
+                "conditions" => "IdUsuario = ?1",
+                "bind" => array(1 => $this->session->get("id")),
+            ));
         
         $data = array();
 
@@ -38,7 +42,7 @@ class EmpresaController extends ControllerBase
             $Nit = $this->request->getPost('Nit');
             $Mision = $this->request->getPost('Mision');
             $Vision = $this->request->getPost('Vision');
-            $Usuario = "1";
+            $Usuario = $this->session->get("id");
 
             $Empresa = new Empresas();
             $Empresa->Nombre = $Nombre;
@@ -66,7 +70,7 @@ class EmpresaController extends ControllerBase
         $this->view->empresa = Empresas::find();
         if ($this->request->isPost()) {
 
-            $Empresa = $this->request->getPost('empresa');
+            $Empresa = $this->session->get("id_empresa");
             $Alto = $this->request->getPost('alto');
             $Ancho = $this->request->getPost('ancho');
             $Largo = $this->request->getPost('largo');
@@ -118,8 +122,14 @@ class EmpresaController extends ControllerBase
             $Descripcion = $this->request->getPost('desc');
             $Scripts = $this->request->getPost('script');
             $TablaIP = $this->request->getPost('ip');
-            $Solicitud = 1;
 
+            $request = Solicitudes::findFirst(array(
+                "conditions" => "IdEmpresa = ?1",
+                "bind" => array(1 => $this->session->get("id_empresa")),
+                "order" => "IdSolicitud DESC"
+            ));
+
+            $Solicitud = $request->IdSolicitud;
             $logico = new Logico();
             $logico->id_solicitud = $Solicitud;
             $logico->escalabilidad = $Escalabilidad;
@@ -146,7 +156,7 @@ class EmpresaController extends ControllerBase
                 $this->flash->error('No se ha podido la informacion satisfactoriamente');
             } else {
                 $this->flash->success('Se ha registrado la informacion satisfactoriamente');
-
+                $this->session->set("id_empresa", "");
                 return $this->response->redirect("empresa/newlogico");
             }
         }

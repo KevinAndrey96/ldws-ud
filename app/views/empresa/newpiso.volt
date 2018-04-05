@@ -1,3 +1,12 @@
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous">{{ link_to("gestionsolicitud/new", "Volver") }}</li>
+        </ul>
+    </nav>
+</div>
+
+
 <div class="page-header">
     <h2>Fisíco</h2>
 </div>
@@ -6,20 +15,18 @@
 Por favor ingrese los datos para el registro fisíco de su empresa
 </p>
 {{ form("empresa/newpiso", "method":"post") }}
-	<label>Empresa</label><br>
-	{{ select("empresa", empresa, "using":["IdEmpresa", "Nombre"], "class":"form-control") }}
 
 	<label>Alto</label>
-	<input class="form-control" type="text" placeholder="Alto" name="alto" required="">
+	<input class="form-control" type="number" placeholder="Alto" name="alto" required="">
 
 	<label>Ancho</label>
 	<input type="number" placeholder="Ancho" class="form-control" name="ancho" required="">
 
 	<label>Largo</label>
-	<input class="form-control" type="text" placeholder="Largo" name="largo" required="">
+	<input class="form-control" type="number" placeholder="Largo" name="largo" required="">
 
 	<label>Número de Equipos</label>
-	<input class="form-control" type="text" placeholder="Número de Equipos" name="equipos" required="">
+	<input class="form-control" type="number" placeholder="Número de Equipos" name="equipos" required="">
 
 	<br>
 	<label>Sala</label>

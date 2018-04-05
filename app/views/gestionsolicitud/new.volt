@@ -1,5 +1,14 @@
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous">{{ link_to("gestionsolicitud", "Volver") }}</li>
+        </ul>
+    </nav>
+</div>
+
+
 <div class="page-header">
-    <h2 align="center">CREAR SOLICITUD</h2>
+    <h2>Solicitud</h2>
 </div>
 
 <p>
