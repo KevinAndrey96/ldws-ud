@@ -12,21 +12,21 @@ class Elements extends Component
     private $_headerMenu = [
         'navbar-left' => [
             'index' => [
-                'caption' => 'Home',
+                'caption' => 'Inicio',
                 'action' => 'index'
             ],
-            'invoices' => [
+            /*'invoices' => [
                 'caption' => 'Invoices',
                 'action' => 'index'
-            ],
-            'prueba' => [
+            ],*/
+            /*'prueba' => [
                 'caption' => 'Prueba',
                 'action' => 'index'
-            ],
-            'contact' => [
+            ],*/
+            /*'contact' => [
                 'caption' => 'Contact',
                 'action' => 'index'
-            ],
+            ],*/
             'gestionusuario' => [
                 'caption' => 'Gestión de Usuarios',
                 'action' => 'index'
@@ -46,23 +46,23 @@ class Elements extends Component
         ],
         'navbar-right' => [
             'session' => [
-                'caption' => 'Log In/Sign Up',
+                'caption' => 'Ingresar/Registrarse',
                 'action' => 'index'
             ],
         ]
     ];
 
     private $_tabs = [
-        'Invoices' => [
+        /*'Invoices' => [
             'controller' => 'invoices',
             'action' => 'index',
             'any' => false
-        ],
+        ],*/
         'Solicitudes' => [
                 'controller' => 'gestionsolicitud',
                 'action' => 'index',
                 'any' => false
-        ],
+        ],/*
         'Companies' => [
             'controller' => 'companies',
             'action' => 'index',
@@ -77,8 +77,8 @@ class Elements extends Component
             'controller' => 'producttypes',
             'action' => 'index',
             'any' => true
-        ],
-        'Your Profile' => [
+        ],*/
+        'Perfil' => [
             'controller' => 'invoices',
             'action' => 'profile',
             'any' => false
@@ -96,7 +96,7 @@ class Elements extends Component
         $auth = $this->session->get('auth');
         if ($auth) {
             $this->_headerMenu['navbar-right']['session'] = [
-                'caption' => 'Log Out',
+                'caption' => 'Cerrar Sesión',
                 'action' => 'end'
             ];
         } else {

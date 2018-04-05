@@ -9,7 +9,7 @@ class SessionController extends ControllerBase
 {
     public function initialize()
     {
-        $this->tag->setTitle('Sign Up/Sign In');
+        $this->tag->setTitle('LDWS');
         parent::initialize();
     }
 
@@ -51,12 +51,12 @@ class SessionController extends ControllerBase
             ]);
             if ($user != false) {
                 $this->_registerSession($user);
-                $this->flash->success('Welcome ' . $user->name);
+                $this->flash->success('Bienvenido ' . $user->name);
 
                 return $this->dispatcher->forward(
                     [
                         "controller" => "invoices",
-                        "action"     => "index",
+                        "action"     => "profile",
                     ]
                 );
             }
@@ -80,7 +80,7 @@ class SessionController extends ControllerBase
     public function endAction()
     {
         $this->session->remove('auth');
-        $this->flash->success('Goodbye!');
+        $this->flash->success('Adios!');
 
         return $this->dispatcher->forward(
             [

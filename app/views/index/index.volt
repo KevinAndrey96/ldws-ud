@@ -1,10 +1,13 @@
 
 {{ content() }}
-
+{% if session.get('auth') == null %} 
+    
 <div class="jumbotron">
     <h1>LDWS</h1>
     <p>MODELO PARA EL DISEÑO DE REDES EN ENTORNOS LAN BASADO EN UN SISTEMA MULTINIVEL</p>
+
     <p>{{ link_to('register', 'Regístrate &raquo;', 'class': 'btn btn-primary btn-large btn-success') }}</p>
+
 </div>
 
 <div class="row">
@@ -22,3 +25,14 @@
         <p>¿El desarrollo de un modelo para el diseño de redes en entornos LAN basado en un sistema multinivel permitirá apoyar el proceso metodológico de diseño e implementación de redes LAN? </p>
     </div>
 </div>
+
+{% else %}
+<div class="jumbotron">
+    <h1>Bienvenido</h1>
+<hr>
+    <p>{{ link_to('empresa', 'Registrar empresa &raquo;', 'class': 'btn btn-warning btn-large btn-success') }}</p>
+    <p>{{ link_to('gestionsolicitud', 'Crear solicitud &raquo;', 'class': 'btn btn-warning btn-large btn-success') }}</p>
+
+</div>
+{% endif %}
+
