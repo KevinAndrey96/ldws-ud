@@ -52,7 +52,7 @@ class SecurityPlugin extends Plugin
 				'invoices'     => ['index', 'profile'],
 				'solicitud'      => ['index', 'solicitud'],
 				'empresa'      => ['index', 'empresa', 'new'],
-				'gestionusuario' => ['index', 'new'],
+				'gestionusuario' => ['index', 'new','edit','delete'],
 				'gestionsolicitud' => ['index', 'new']
 			];
 			foreach ($privateResources as $resource => $actions) {

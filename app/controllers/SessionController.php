@@ -32,6 +32,7 @@ class SessionController extends ControllerBase
             'id' => $user->id,
             'name' => $user->name
         ]);
+        $this->session->set("rol",$user->rol_idrol);
     }
 
     /**
@@ -51,7 +52,7 @@ class SessionController extends ControllerBase
             ]);
             if ($user != false) {
                 $this->_registerSession($user);
-                $this->flash->success('Welcome ' . $user->name);
+                $this->flash->success('Bienvenido ' . $user->name);
 
                 return $this->dispatcher->forward(
                     [
