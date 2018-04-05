@@ -50,15 +50,10 @@ class SecurityPlugin extends Plugin
 				'products'     => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
 				'producttypes' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
 				'invoices'     => ['index', 'profile'],
-<<<<<<< HEAD
 				'solicitud'      => ['index', 'solicitud'],
 				'empresa'      => ['index', 'empresa', 'new'],
-				'prueba'      => ['index']
-=======
-				'prueba'      => ['index'],
 				'gestionusuario' => ['index', 'new'],
 				'gestionsolicitud' => ['index', 'new']
->>>>>>> Develop
 			];
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
