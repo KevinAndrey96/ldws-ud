@@ -7,6 +7,7 @@
             <td>Visión</td>
             <td>Misión</td>
             <td>Nit</td>
+            <td>Acción</td>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,13 @@
                     <td>{{ item.vision }}</td>
                     <td>{{ item.mision }}</td>
                     <td>{{ item.nit }}</td>  
+                    <td>
+                        {{ form("gestionsolicitud/new", "method":"post") }}
+                            <input type="hidden" name="IdEmpresa" value="{{ item.id }}">
+                            <input type="hidden" name="validar" value="true">
+                            <input style="font-size:11px" type="submit" class="btn btn-primary" value="Crear Solicitud">
+                        {{ end_form() }}
+                    </td>  
                 </tr>          
             {% endfor %}                
         {% endif %}

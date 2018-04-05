@@ -28,4 +28,9 @@ class Solicitudes extends Model
      * @var string
      */
     public $Servicio;
+
+    /**
+     * @var string
+     */
+    public $titulo;
 }

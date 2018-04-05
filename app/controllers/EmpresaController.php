@@ -21,6 +21,7 @@ class EmpresaController extends ControllerBase
                 "mision" => $item->Mision,
                 "vision" => $item->Vision,
                 "nit" => $item->Nit,
+                "id" => $item->IdEmpresa
             );
         }
         
@@ -52,7 +53,7 @@ class EmpresaController extends ControllerBase
                 }
             } else {
                 $this->flash->success('La empresa se ha registrado satisfactoriamente');
-                return $this->response->redirect("gestionsolicitud/new");
+                return $this->response->redirect("empresa/index");
             }
             
         }

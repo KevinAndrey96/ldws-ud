@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <td>Codigo Solicitud</td>
+            <td>Titulo</td>
             <td>Descripcion</td>
             <td>Observacion</td>
             <!--<td>M</td>
@@ -17,6 +18,7 @@
             {% for item in datos %}
                 <tr>
                     <td>{{ item.Solicitud }}</td>
+                    <td>{{ item.Titulo }}</td>
                     <td>{{ item.Descripcion }}</td>
                     <td>{{ item.Observaciones }}</td>
                     <!--<td align="right"><input type="checkbox"></td>
@@ -28,5 +30,5 @@
 </table>
 
 <div align="right">
-    {{ link_to("empresa/new", "Crear", "class": "btn btn-success") }}
+    {{ link_to("empresa/index", "Crear", "class": "btn btn-success") }}
 </div>
