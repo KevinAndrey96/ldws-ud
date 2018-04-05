@@ -1,6 +1,6 @@
 <?php
 
-class GestionUsuarioController extends ControllerBase
+class GestionusuarioController extends ControllerBase
 {
     public function initialize()
     {
