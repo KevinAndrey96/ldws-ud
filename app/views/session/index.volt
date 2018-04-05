@@ -5,24 +5,24 @@
 
     <div class="col-md-6">
         <div class="page-header">
-            <h2>Log In</h2>
+            <h2>Iniciar Sesión</h2>
         </div>
         {{ form('session/start', 'role': 'form') }}
             <fieldset>
                 <div class="form-group">
-                    <label for="email">Username/Email</label>
+                    <label for="email">Email</label>
                     <div class="controls">
                         {{ text_field('email', 'class': "form-control") }}
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Contraseña</label>
                     <div class="controls">
                         {{ password_field('password', 'class': "form-control") }}
                     </div>
                 </div>
                 <div class="form-group">
-                    {{ submit_button('Login', 'class': 'btn btn-primary btn-large') }}
+                    {{ submit_button('Ingresar', 'class': 'btn btn-primary btn-large') }}
                 </div>
             </fieldset>
         </form>
@@ -31,18 +31,18 @@
     <div class="col-md-6">
 
         <div class="page-header">
-            <h2>Don't have an account yet?</h2>
+            <h2>¿Aún no tienes una cuenta?</h2>
         </div>
 
-        <p>Create an account offers the following advantages:</p>
+        <p>Crea una cuenta para tener acceso a nuestra plataforma:</p>
         <ul>
-            <li>Create, track and export your invoices online</li>
-            <li>Gain critical insights into how your business is doing</li>
-            <li>Stay informed about promotions and special packages</li>
+            <li>Registra tu empresa y solicita asesoramiento</li>
+            <li>Visualiza PDF's sobre la organización ideal de tu empresa</li>
+            <li>Observa gráficas de distribución de componentes e infraestructura</li>
         </ul>
 
         <div class="clearfix center">
-            {{ link_to('register', 'Sign Up', 'class': 'btn btn-primary btn-large btn-success') }}
+            {{ link_to('Registro', 'Sign Up', 'class': 'btn btn-primary btn-large btn-success') }}
         </div>
     </div>
 

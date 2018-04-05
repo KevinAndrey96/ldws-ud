@@ -2,23 +2,23 @@
 {{ content() }}
 
 <div class="jumbotron">
-    <h1>Welcome to INVO</h1>
-    <p>INVO is a revolutionary application to create invoices online for free.
-    Receive online payments from your clients and improve your cash flow</p>
-    <p>{{ link_to('register', 'Try it for Free &raquo;', 'class': 'btn btn-primary btn-large btn-success') }}</p>
+    <h1>LDWS</h1>
+    <p>MODELO PARA EL DISEÑO DE REDES EN ENTORNOS LAN BASADO EN UN SISTEMA MULTINIVEL</p>
+    <p>{{ link_to('register', 'Regístrate &raquo;', 'class': 'btn btn-primary btn-large btn-success') }}</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Manage Invoices Online</h2>
-        <p>Create, track and export your invoices online. Automate recurring invoices and design your own invoice using our invoice template and brand it with your business logo. </p>
+        <h2>Acerca de LDWS</h2>
+        <p>Software para el desarrollo de un modelo para el diseño de redes en entornos LAN basado en un sistema multinivel que permitirá disponer de una herramienta de apoyo al enfoque metodológico Top-down para el diseño de redes.. </p>
     </div>
     <div class="col-md-4">
-        <h2>Dashboards And Reports</h2>
-        <p>Gain critical insights into how your business is doing. See what sells most, who are your top paying customers and the average time your customers take to pay.</p>
+        <h2>¿Qué es Top-Down?</h2>
+        <p>La metodología top-down está conformada por cuatro partes integrales las cuales son: Identificar las necesidades y metas del cliente, diseño lógico de red, diseño físico de red, pruebas, optimización, y documentación del diseño de red.
+</p>
     </div>
     <div class="col-md-4">
-        <h2>Invite, Share And Collaborate</h2>
-        <p>Invite users and share your workload as invoice supports multiple users with different permissions. It helps your business to be more productive and efficient. </p>
+        <h2>Problematica</h2>
+        <p>¿El desarrollo de un modelo para el diseño de redes en entornos LAN basado en un sistema multinivel permitirá apoyar el proceso metodológico de diseño e implementación de redes LAN? </p>
     </div>
 </div>
