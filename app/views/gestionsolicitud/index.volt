@@ -28,5 +28,5 @@
 </table>
 
 <div align="right">
-    {{ link_to("gestionsolicitud/new", "Crear", "class": "btn btn-success") }}
+    {{ link_to("empresa/new", "Crear", "class": "btn btn-success") }}
 </div>

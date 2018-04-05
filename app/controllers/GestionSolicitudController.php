@@ -57,12 +57,7 @@ class GestionsolicitudController extends ControllerBase
                 $this->flash->error("No se pudo guardar la solicitud");
             } else {
                 $this->flash->success('Se guardo la solicitud exitosamente');
-                return $this->dispatcher->forward(
-                    [
-                        "controller" => "gestionsolicitud",
-                        "action"     => "index",
-                    ]
-                );
+                return $this->response->redirect("empresa/newpiso");
             }
         }
 
