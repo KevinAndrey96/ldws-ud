@@ -27,5 +27,5 @@ class Empresas extends Model
     /**
      * @var string
      */
-    public $Usuario;
+    public $IdUsuario;
 }

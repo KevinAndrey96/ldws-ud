@@ -27,12 +27,13 @@ class EmpresaController extends ControllerBase
 
             $Empresa = new Empresas();
             $Empresa->Nombre = $Nombre;
-            $Empresa->Usuario = $Usuario;
+            $Empresa->IdUsuario = $Usuario;
             $Empresa->Nit = $Nit;
             $Empresa->Mision = $Mision;
             $Empresa->Vision = $Vision;
-            
-            if ($Empresa->save() == false) {
+            $Empresa->save();
+            /*
+if ($Empresa->save() == false) {
                 foreach ($Empresa->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
@@ -47,6 +48,7 @@ class EmpresaController extends ControllerBase
                     ]
                 );
             }
+            */
         }
 
         $this->view->form = $form;
