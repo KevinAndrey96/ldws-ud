@@ -15,7 +15,13 @@ class GraficaController extends ControllerBase
      */
     public function indexAction()
     {
-
+        /*$num = Pisos::findFirst(array(
+                "conditions" => "id_empresa = ?1",
+                "bind" => array(1 => $Empresa),
+                "order" => "id DESC"
+            ));*/
+        $num=1;
+        //$this->view->datos = $data;
     }
 
 }

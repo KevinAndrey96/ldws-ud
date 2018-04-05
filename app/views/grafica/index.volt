@@ -5,7 +5,7 @@
 <p>
 
 </p>
-
+{{ num }}
 <div class="container">
 {{ image("images/pison.png", "class":"img-responsive") }}
 <div class="centered"><button class="btn btn-info">Ver piso</button></div>
