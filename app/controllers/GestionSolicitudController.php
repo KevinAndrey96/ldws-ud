@@ -3,7 +3,7 @@
 use Phalcon\Mvc\Model;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
-class GestionSolicitudController extends ControllerBase
+class GestionsolicitudController extends ControllerBase
 {
     public function initialize()
     {
