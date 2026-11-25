@@ -1,81 +1,67 @@
 <div class="row">
     <nav>
         <ul class="pager">
-            <li class="previous">{{ link_to("book", "Go Back") }}</li>
+            <li class="previous">{{ link_to("gestionusuario", "Volver al Listado") }}</li>
         </ul>
     </nav>
 </div>
 
 <div class="page-header">
-    <h1 align="center">
-        Crear Usuario
-    </h1>
+    <h2>Registrar Nuevo Usuario</h2>
 </div>
 
 {{ content() }}
 
-{{ form("book/create", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
+<div class="panel panel-default">
+    <div class="panel-body">
+        {{ form("gestionusuario/new", "method":"post", "class":"form-horizontal") }}
 
-<div class="form-group">
-    <label for="fieldId" class="col-sm-2 control-label">Cedula</label>
-    <div class="col-sm-10">
-        {{ text_field("id", "type" : "numeric", "class" : "form-control", "id" : "fieldId") }}
+            <div class="form-group">
+                <label for="fieldName" class="col-sm-2 control-label">Nombre Completo</label>
+                <div class="col-sm-10">
+                    <input type="text" name="name" id="fieldName" class="form-control" placeholder="Ej: Kevin Andrey Martinez" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fieldUsername" class="col-sm-2 control-label">Nombre de Usuario</label>
+                <div class="col-sm-10">
+                    <input type="text" name="username" id="fieldUsername" class="form-control" placeholder="Ej: kmartinez" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fieldEmail" class="col-sm-2 control-label">Correo Electrónico</label>
+                <div class="col-sm-10">
+                    <input type="email" name="email" id="fieldEmail" class="form-control" placeholder="Ej: kmartinez@udistrital.edu.co" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fieldPassword" class="col-sm-2 control-label">Contraseña</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" id="fieldPassword" class="form-control" placeholder="Contraseña segura" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fieldRole" class="col-sm-2 control-label">Rol del Sistema</label>
+                <div class="col-sm-10">
+                    <select name="role" id="fieldRole" class="form-control">
+                        <option value="Investigador">Investigador / Diseñador de Red</option>
+                        <option value="Admin">Administrador General</option>
+                        <option value="Auditor">Auditor de Calidad</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    {{ submit_button("Guardar Usuario", "class": "btn btn-success") }}
+                    {{ link_to("gestionusuario", "Cancelar", "class": "btn btn-default") }}
+                </div>
+            </div>
+
+        {{ end_form() }}
     </div>
 </div>
-
-<div class="form-group">
-    <label for="fieldTitulo" class="col-sm-2 control-label">Nombre</label>
-    <div class="col-sm-10">
-        {{ text_field("titulo", "size" : 30, "class" : "form-control", "id" : "fieldTitulo") }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldAutor" class="col-sm-2 control-label">Apellido</label>
-    <div class="col-sm-10">
-        {{ text_field("autor", "size" : 30, "class" : "form-control", "id" : "fieldAutor") }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldAutor" class="col-sm-2 control-label">Usuario</label>
-    <div class="col-sm-10">
-        {{ text_field("autor", "size" : 30, "class" : "form-control", "id" : "fieldAutor") }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldAutor" class="col-sm-2 control-label">Clave</label>
-    <div class="col-sm-10">
-        {{ text_field("autor", "size" : 30, "class" : "form-control", "id" : "fieldAutor") }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldAutor" class="col-sm-2 control-label">Correo</label>
-    <div class="col-sm-10">
-        {{ text_field("autor", "size" : 30, "class" : "form-control", "id" : "fieldAutor") }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldAutor" class="col-sm-2 control-label">Telefono</label>
-    <div class="col-sm-10">
-        {{ text_field("autor", "size" : 30, "class" : "form-control", "id" : "fieldAutor") }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldAutor" class="col-sm-2 control-label">Rol</label>
-    <div class="col-sm-10">
-        {{ text_field("autor", "size" : 30, "class" : "form-control", "id" : "fieldAutor") }}
-    </div>
-</div>
-
-<div align="center"class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        {{ submit_button('Guardar', 'class': 'btn btn-default') }}
-    </div>
-</div>
-
-</form>

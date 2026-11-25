@@ -1,46 +1,53 @@
-<div class="row">
-    <nav>
-        <ul class="pager">
-            <li class="previous">{{ link_to("index", "Volver") }}</li>
-        </ul>
-    </nav>
+<div class="page-header">
+    <h2>Empresas Clientes <small>Metodología Top-Down: Análisis de Requerimientos</small></h2>
 </div>
 
-<h2 align="center">Empresas</h2>
+{{ content() }}
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <td>Nombre</td>
-            <td>Visión</td>
-            <td>Misión</td>
-            <td>Nit</td>
-            <td>Acción</td>
-        </tr>
-    </thead>
-    <tbody>
-        {% if datos is empty %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="glyphicon glyphicon-briefcase"></i> Empresas Registradas</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr class="info">
+                    <th>ID</th>
+                    <th>Nombre de Empresa</th>
+                    <th>NIT</th>
+                    <th>Misión</th>
+                    <th>Visión</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if datos is empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No hay empresas registradas. Cree la primera empresa para iniciar el diseño de red.</td>
+                    </tr>
+                {% else %}
+                    {% for item in datos %}
+                        <tr>
+                            <td><span class="label label-primary">#{{ item.id }}</span></td>
+                            <td><strong>{{ item.nombre }}</strong></td>
+                            <td><code>{{ item.nit }}</code></td>
+                            <td><small>{{ item.mision }}</small></td>
+                            <td><small>{{ item.vision }}</small></td>
+                            <td class="text-center" style="white-space: nowrap;">
+                                {{ form("gestionsolicitud/new", "method":"post", "style":"display:inline;") }}
+                                    <input type="hidden" name="IdEmpresa" value="{{ item.id }}">
+                                    <input type="hidden" name="validar" value="true">
+                                    <button type="submit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus"></i> Crear Solicitud</button>
+                                {{ end_form() }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        {% else %}
-            {% for item in datos %}
-                <tr>
-                    <td>{{ item.nombre }}</td>
-                    <td>{{ item.vision }}</td>
-                    <td>{{ item.mision }}</td>
-                    <td>{{ item.nit }}</td>  
-                    <td>
-                        {{ form("gestionsolicitud/new", "method":"post") }}
-                            <input type="hidden" name="IdEmpresa" value="{{ item.id }}">
-                            <input type="hidden" name="validar" value="true">
-                            <input style="font-size:11px" type="submit" class="btn btn-primary" value="Crear Solicitud">
-                        {{ end_form() }}
-                    </td>  
-                </tr>          
-            {% endfor %}                
-        {% endif %}
-    </tbody>
-</table>
-
-<div align="right">
-    {{ link_to("empresa/new", "Crear", "class": "btn btn-success") }}
+<div class="text-right">
+    {{ link_to("empresa/new", "Registrar Nueva Empresa &raquo;", "class": "btn btn-success") }}
 </div>

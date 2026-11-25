@@ -82,6 +82,13 @@ class Services extends \Base\Services
     {
         $config = $this->get('config')->get('database')->toArray();
 
+        // Soporte dinamico para variables de entorno en Docker / CI / Produccion
+        if (getenv('DB_HOST')) $config['host'] = getenv('DB_HOST');
+        if (getenv('DB_USER')) $config['username'] = getenv('DB_USER');
+        if (getenv('DB_PASSWORD') !== false) $config['password'] = getenv('DB_PASSWORD');
+        if (getenv('DB_NAME')) $config['dbname'] = getenv('DB_NAME');
+        if (getenv('DB_PORT')) $config['port'] = (int) getenv('DB_PORT');
+
         $dbClass = 'Phalcon\Db\Adapter\Pdo\\' . $config['adapter'];
         unset($config['adapter']);
 

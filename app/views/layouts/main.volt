@@ -18,6 +18,6 @@
     {{ content() }}
     <hr>
     <footer>
-        <p>&copy; LDWS 2018</p>
+        <p>&copy; Universidad Distrital Francisco Jose de Caldas - LDWS (Top-Down LAN Network Design System)</p>
     </footer>
 </div>

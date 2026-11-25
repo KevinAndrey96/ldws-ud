@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  architecture-verification:
+    name: Architecture & Top-Down Logic Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run LDWS Architecture Verifier
+        run: python scripts/verify_ldws.py
+
+  php-syntax-check:
+    name: PHP Syntax Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: json, pdo, pdo_mysql, gd
+
+      - name: Lint PHP Files
+        run: |
+          find app public -name "*.php" -exec php -l {} +
+
+  database-validation:
+    name: MariaDB Schema & Seed Validation
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.5
+        env:
+          MYSQL_ROOT_PASSWORD: root_pass
+          MYSQL_DATABASE: ldwsud_base
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=5s --health-retries=5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Import Relational Schema & Seeds
+        run: |
+          mariadb -h 127.0.0.1 -u root -proot_pass ldwsud_base < schemas/ldws_ud.sql
+
+      - name: Verify Table Counts and Integrity
+        run: |
+          mariadb -h 127.0.0.1 -u root -proot_pass -e "SELECT table_name, table_rows FROM information_schema.tables WHERE table_schema='ldwsud_base';"
+          mariadb -h 127.0.0.1 -u root -proot_pass -e "SELECT COUNT(*) AS total_users FROM ldwsud_base.users; SELECT COUNT(*) AS total_pisos FROM ldwsud_base.pisos; SELECT COUNT(*) AS total_equipos FROM ldwsud_base.equipos;"
+
+  docker-validation:
+    name: Docker Containerization Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose Configuration
+        run: docker compose config
+
+      - name: Build Application Docker Image
+        run: docker build -t ldws-ud:latest .

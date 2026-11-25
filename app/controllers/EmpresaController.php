@@ -1,6 +1,12 @@
 <?php
+
 use Phalcon\Flash;
 use Phalcon\Session;
+
+/**
+ * Controlador de Gestion de Empresa, Pisos y Diseno Logico
+ * Universidad Distrital Francisco Jose de Caldas - LDWS
+ */
 class EmpresaController extends ControllerBase
 {
     public function initialize()
@@ -11,22 +17,22 @@ class EmpresaController extends ControllerBase
 
     public function indexAction()
     {
-        //$empresa = Empresas::find();
-        $empresa = Empresas::find(array(
-                "conditions" => "IdUsuario = ?1",
-                "bind" => array(1 => $this->session->get("id")),
-            ));
+        $usuarioId = $this->session->get("id");
+        $empresa = Empresas::find([
+            "conditions" => "IdUsuario = ?1",
+            "bind" => [1 => $usuarioId],
+        ]);
         
-        $data = array();
+        $data = [];
 
-        foreach ($empresa as $item){
-            $data[] = (object) array(
+        foreach ($empresa as $item) {
+            $data[] = (object) [
                 "nombre" => $item->Nombre,
                 "mision" => $item->Mision,
                 "vision" => $item->Vision,
                 "nit" => $item->Nit,
                 "id" => $item->IdEmpresa
-            );
+            ];
         }
         
         $this->view->datos = $data;
@@ -37,11 +43,10 @@ class EmpresaController extends ControllerBase
         $form = new RegisterForm;
 
         if ($this->request->isPost()) {
-
-            $Nombre = $this->request->getPost('Nombre');
-            $Nit = $this->request->getPost('Nit');
-            $Mision = $this->request->getPost('Mision');
-            $Vision = $this->request->getPost('Vision');
+            $Nombre = $this->request->getPost('Nombre', 'striptags');
+            $Nit = $this->request->getPost('Nit', 'striptags');
+            $Mision = $this->request->getPost('Mision', 'striptags');
+            $Vision = $this->request->getPost('Vision', 'striptags');
             $Usuario = $this->session->get("id");
 
             $Empresa = new Empresas();
@@ -50,16 +55,17 @@ class EmpresaController extends ControllerBase
             $Empresa->Nit = $Nit;
             $Empresa->Mision = $Mision;
             $Empresa->Vision = $Vision;
+            $Empresa->created_at = date('Y-m-d H:i:s');
             
             if ($Empresa->save() == false) {
                 foreach ($Empresa->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
             } else {
+                $this->session->set("id_empresa", $Empresa->IdEmpresa);
                 $this->flash->success('La empresa se ha registrado satisfactoriamente');
-                return $this->response->redirect("empresa/index");
+                return $this->response->redirect("gestionsolicitud/new");
             }
-            
         }
 
         $this->view->form = $form;
@@ -68,20 +74,33 @@ class EmpresaController extends ControllerBase
     public function newPisoAction()
     {
         $this->view->empresa = Empresas::find();
-        if ($this->request->isPost()) {
 
+        if ($this->request->isPost()) {
             $Empresa = $this->session->get("id_empresa");
+
+            if (empty($Empresa)) {
+                $emp = Empresas::findFirst([
+                    "conditions" => "IdUsuario = ?1",
+                    "bind" => [1 => $this->session->get("id")],
+                    "order" => "IdEmpresa DESC"
+                ]);
+                if ($emp) {
+                    $Empresa = $emp->IdEmpresa;
+                    $this->session->set("id_empresa", $Empresa);
+                }
+            }
+
             $Alto = $this->request->getPost('alto');
             $Ancho = $this->request->getPost('ancho');
             $Largo = $this->request->getPost('largo');
             $Equipo = $this->request->getPost('equipos');
             $Sala = $this->request->getPost('sala');
 
-            $num = Pisos::findFirst(array(
+            $num = Pisos::findFirst([
                 "conditions" => "id_empresa = ?1",
-                "bind" => array(1 => $Empresa),
+                "bind" => [1 => $Empresa],
                 "order" => "id_piso DESC"
-            ));
+            ]);
 
             $piso = new Pisos();
             $piso->id_empresa = $Empresa;
@@ -89,24 +108,14 @@ class EmpresaController extends ControllerBase
             $piso->ancho = $Ancho;
             $piso->largo = $Largo;
             $piso->equipos = $Equipo;
-
-            if ($Sala == 'on') {
-                $piso->sala = 1;
-            } else {
-                $piso->sala = 0;
-            }
-            
-            if ($num) {
-                $piso->numero = $num->numero+1;
-            } else {
-                $piso->numero = 1;
-            }
+            $piso->sala = ($Sala == 'on' || $Sala == '1') ? 1 : 0;
+            $piso->numero = $num ? ($num->numero + 1) : 1;
+            $piso->created_at = date('Y-m-d H:i:s');
 
             if ($piso->save() == false) {
-                $this->flash->error('No se ha podido el piso satisfactoriamente');
+                $this->flash->error('No se ha podido guardar el piso');
             } else {
-                $this->flash->success('Se ha registrado el piso satisfactoriamente');
-
+                $this->flash->success('Se ha registrado el Piso ' . $piso->numero . ' satisfactoriamente');
                 return $this->response->redirect("empresa/newpiso");
             }
         }
@@ -115,6 +124,19 @@ class EmpresaController extends ControllerBase
     public function newLogicoAction()
     {
         if ($this->request->isPost()) {
+            $idEmpresa = $this->session->get("id_empresa");
+
+            if (empty($idEmpresa)) {
+                $emp = Empresas::findFirst([
+                    "conditions" => "IdUsuario = ?1",
+                    "bind" => [1 => $this->session->get("id")],
+                    "order" => "IdEmpresa DESC"
+                ]);
+                if ($emp) {
+                    $idEmpresa = $emp->IdEmpresa;
+                    $this->session->set("id_empresa", $idEmpresa);
+                }
+            }
 
             $Redundancia = $this->request->getPost('redundancia');
             $Escalabilidad = $this->request->getPost('escalabilidad');
@@ -123,41 +145,33 @@ class EmpresaController extends ControllerBase
             $Scripts = $this->request->getPost('script');
             $TablaIP = $this->request->getPost('ip');
 
-            $request = Solicitudes::findFirst(array(
+            $request = Solicitudes::findFirst([
                 "conditions" => "IdEmpresa = ?1",
-                "bind" => array(1 => $this->session->get("id_empresa")),
+                "bind" => [1 => $idEmpresa],
                 "order" => "IdSolicitud DESC"
-            ));
+            ]);
+
+            if (!$request) {
+                $this->flash->error('No se encontro una solicitud activa para asociar el diseno logico');
+                return $this->response->redirect("gestionsolicitud/new");
+            }
 
             $Solicitud = $request->IdSolicitud;
             $logico = new Logico();
             $logico->id_solicitud = $Solicitud;
-            $logico->escalabilidad = $Escalabilidad;
-            $logico->subredes = $Subredes;
+            $logico->escalabilidad = !empty($Escalabilidad) ? $Escalabilidad : "30%";
+            $logico->subredes = !empty($Subredes) ? (int)$Subredes : 4;
             $logico->desc_subred = $Descripcion;
-
-            if ($Redundancia == 'on') {
-                $logico->redundancia = 1;
-            } else {
-                $logico->redundancia = 0;
-            }
-            if ($Scripts == 'on') {
-                $logico->scripts = 1;
-            } else {
-                $logico->scripts = 0;
-            }
-            if ($TablaIP == 'on') {
-                $logico->tabla_dirip = 1;
-            } else {
-                $logico->tabla_dirip = 0;
-            }
+            $logico->redundancia = ($Redundancia == 'on' || $Redundancia == '1') ? 1 : 0;
+            $logico->scripts = ($Scripts == 'on' || $Scripts == '1') ? 1 : 0;
+            $logico->tabla_dirip = ($TablaIP == 'on' || $TablaIP == '1') ? 1 : 0;
+            $logico->created_at = date('Y-m-d H:i:s');
             
             if ($logico->save() == false) {
-                $this->flash->error('No se ha podido la informacion satisfactoriamente');
+                $this->flash->error('No se ha podido guardar la informacion logica');
             } else {
-                $this->flash->success('Se ha registrado la informacion satisfactoriamente');
-                $this->session->set("id_empresa", "");
-                return $this->response->redirect("empresa/newlogico");
+                $this->flash->success('Diseno logico guardado exitosamente. Visualice la topologia de pisos y equipos.');
+                return $this->response->redirect("grafica/index");
             }
         }
     }

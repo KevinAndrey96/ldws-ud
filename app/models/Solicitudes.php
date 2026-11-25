@@ -2,12 +2,26 @@
 
 use Phalcon\Mvc\Model;
 
+/**
+ * Modelo de Solicitud de Diseno de Red
+ * Universidad Distrital Francisco Jose de Caldas - LDWS
+ */
 class Solicitudes extends Model
 {
     /**
      * @var integer
      */
+    public $IdSolicitud;
+
+    /**
+     * @var integer
+     */
     public $IdEmpresa;
+
+    /**
+     * @var string
+     */
+    public $titulo;
 
     /**
      * @var string
@@ -32,5 +46,13 @@ class Solicitudes extends Model
     /**
      * @var string
      */
-    public $titulo;
+    public $created_at;
+
+    public function initialize()
+    {
+        $this->setSource('solicitudes');
+        $this->belongsTo('IdEmpresa', 'Empresas', 'IdEmpresa', ['alias' => 'empresa']);
+        $this->hasOne('IdSolicitud', 'Logico', 'id_solicitud', ['alias' => 'logico']);
+        $this->hasMany('IdSolicitud', 'Equipos', 'id_solicitud', ['alias' => 'equipos']);
+    }
 }

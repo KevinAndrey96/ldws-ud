@@ -59,13 +59,8 @@ class SessionController extends ControllerBase
                 $this->session->set("name", $user->name);
                 $this->session->set("id", $user->id);
                 $this->flash->success('Bienvenido ' . $this->session->get("name"));
-                                ; 
-                return $this->dispatcher->forward(
-                    [
-                        "controller" => "invoices",
-                        "action"     => "profile",
-                    ]
-                );
+
+                return $this->response->redirect("empresa/index");
             }
 
             $this->flash->error('Wrong email/password');

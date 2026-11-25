@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ldws-web-app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=ldws_user
+      - DB_PASSWORD=ldws_pass
+      - DB_NAME=ldwsud_base
+      - DB_PORT=3306
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - ldws-network
+
+  mysql:
+    image: mariadb:10.5
+    container_name: ldws-mysql-db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pass
+      - MYSQL_DATABASE=ldwsud_base
+      - MYSQL_USER=ldws_user
+      - MYSQL_PASSWORD=ldws_pass
+    volumes:
+      - ./schemas/ldws_ud.sql:/docker-entrypoint-initdb.d/01-ldws_ud.sql:ro
+      - ldws-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_pass"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - ldws-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ldws-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+    depends_on:
+      - mysql
+    networks:
+      - ldws-network
+
+volumes:
+  ldws-db-data:
+
+networks:
+  ldws-network:
+    driver: bridge

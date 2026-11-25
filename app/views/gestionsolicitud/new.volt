@@ -30,7 +30,7 @@ Bienvenido al módulo de solicitudes, aquí podrá iniciar el proceso de solicit
 	<textarea class="form-control" placeholder="Observaciones" name="obs"></textarea>
 
 	<label>Servicios necesarios</label>
-	<select class="form-control" placeholder="Servicios Necesarios" name="serv" multiple>
+	<select class="form-control" placeholder="Servicios Necesarios" name="serv[]" multiple>
 	  <option value="web">WEB</option>
 	  <option value="bd">BD</option>
 	  <option value="aplicaciones">APLICACIONES</option>

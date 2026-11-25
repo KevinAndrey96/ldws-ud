@@ -1,34 +1,51 @@
-<h2 align="center">Gestión de Solicitudes</h2>
+<div class="page-header">
+    <h2>Gestión de Solicitudes <small>Proyectos de Diseño de Red LAN</small></h2>
+</div>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <td>Codigo Solicitud</td>
-            <td>Titulo</td>
-            <td>Descripcion</td>
-            <td>Observacion</td>
-            <!--<td>M</td>
-            <td>E</td>-->
-        </tr>
-    </thead>
-    <tbody>
-        {% if datos is empty %}
+{{ content() }}
 
-        {% else %}
-            {% for item in datos %}
-                <tr>
-                    <td>{{ item.Solicitud }}</td>
-                    <td>{{ item.Titulo }}</td>
-                    <td>{{ item.Descripcion }}</td>
-                    <td>{{ item.Observaciones }}</td>
-                    <!--<td align="right"><input type="checkbox"></td>
-                    <td align="right"><input type="checkbox"></td> --> 
-                </tr>          
-            {% endfor %}                
-        {% endif %}
-    </tbody>
-</table>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="glyphicon glyphicon-folder-open"></i> Solicitudes Registradas</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr class="info">
+                    <th>Código</th>
+                    <th>Empresa</th>
+                    <th>Título del Proyecto</th>
+                    <th>Servicios Requeridos</th>
+                    <th>Observaciones Técnicas</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if datos is empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No hay solicitudes registradas aún. Seleccione una empresa para crear un nuevo proyecto.</td>
+                    </tr>
+                {% else %}
+                    {% for item in datos %}
+                        <tr>
+                            <td><span class="label label-primary">#{{ item.Solicitud }}</span></td>
+                            <td><strong>{{ item.Empresa }}</strong></td>
+                            <td>{{ item.Titulo }}</td>
+                            <td><small><span class="label label-info">{{ item.Servicio }}</span></small></td>
+                            <td><small>{{ item.Observaciones }}</small></td>
+                            <td class="text-center">
+                                {{ link_to("grafica", "Topología", "class": "btn btn-xs btn-info") }}
+                                {{ link_to("gestionequipos", "Equipos", "class": "btn btn-xs btn-warning") }}
+                                {{ link_to("verreportes", "Reporte", "class": "btn btn-xs btn-success") }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<div align="right">
-    {{ link_to("empresa/index", "Crear", "class": "btn btn-success") }}
+<div class="text-right">
+    {{ link_to("empresa/index", "Nueva Solicitud desde Empresa &raquo;", "class": "btn btn-success") }}
 </div>

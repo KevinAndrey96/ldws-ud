@@ -3,47 +3,46 @@
 use Phalcon\Mvc\Model;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
+/**
+ * Controlador de Gestion de Solicitudes de Diseno de Red
+ * Universidad Distrital Francisco Jose de Caldas - LDWS
+ */
 class GestionsolicitudController extends ControllerBase
 {
     public function initialize()
     {
-        $this->tag->setTitle('Gestión de Usuario');
+        $this->tag->setTitle('Gestion de Solicitudes');
         parent::initialize();
     }
 
     public function indexAction()
     {
-        $data = array();
-        $solicitudes = array();
-        $empresa = Empresas::find(array(
-                "conditions" => "IdUsuario = ?1",
-                "bind" => array(1 => $this->session->get("id")),
-            ));
+        $data = [];
+        $usuarioId = $this->session->get("id");
 
-        foreach ($empresa as $key){
-            $request = Solicitudes::findFirst(array(
+        $empresas = Empresas::find([
+            "conditions" => "IdUsuario = ?1",
+            "bind" => [1 => $usuarioId],
+        ]);
+
+        foreach ($empresas as $emp) {
+            $solicitudes = Solicitudes::find([
                 "conditions" => "IdEmpresa = ?1",
-                "bind" => array(1 => $key->IdEmpresa),
-            ));
+                "bind" => [1 => $emp->IdEmpresa],
+                "order" => "IdSolicitud DESC"
+            ]);
 
-            if ($request) {
-                array_push($solicitudes, $request->IdSolicitud);
+            foreach ($solicitudes as $solicitud) {
+                $data[] = (object) [
+                    "Solicitud" => $solicitud->IdSolicitud,
+                    "Empresa" => $emp->Nombre,
+                    "Titulo" => $solicitud->titulo,
+                    "Descripcion" => $solicitud->Descripcion,
+                    "Observaciones" => $solicitud->Observaciones,
+                    "Servicio" => $solicitud->Servicio,
+                    "Fecha" => $solicitud->created_at
+                ];
             }
-        }
-
-        //print_r($solicitudes);die;
-        foreach ($solicitudes as $s){
-            $solicitud = Solicitudes::findFirst(array(
-                "conditions" => "IdSolicitud = ?1",
-                "bind" => array(1 => $s),
-            ));
-
-            $data[] = (object) array(
-                "Solicitud" => $solicitud->IdSolicitud,
-                "Titulo" => $solicitud->titulo,
-                "Descripcion" => $solicitud->Descripcion,
-                "Observaciones" => $solicitud->Observaciones,
-            );
         }
 
         $this->view->datos = $data;
@@ -51,20 +50,33 @@ class GestionsolicitudController extends ControllerBase
 
     public function newAction()
     {
-        $this->view->empresa = Empresas::find();
+        $usuarioId = $this->session->get("id");
+        $this->view->empresa = Empresas::find([
+            "conditions" => "IdUsuario = ?1",
+            "bind" => [1 => $usuarioId]
+        ]);
         
         if ($this->request->isPost()) {
+            $post = $this->request->getPost();
+            $idEmpresa = isset($post['IdEmpresa']) ? $post['IdEmpresa'] : null;
 
-        	$post = $this->request->getPost();
-            $idEmpresa = $post['IdEmpresa'];
+            if (empty($idEmpresa)) {
+                $emp = Empresas::findFirst([
+                    "conditions" => "IdUsuario = ?1",
+                    "bind" => [1 => $usuarioId],
+                    "order" => "IdEmpresa DESC"
+                ]);
+                if ($emp) $idEmpresa = $emp->IdEmpresa;
+            }
 
+            if (!isset($post['validar']) || $post['validar'] != true) {
+                $titulo = isset($post['titulo']) ? $post['titulo'] : '';
+                $descripcion = isset($post['desc']) ? $post['desc'] : '';
+                $objetivos = isset($post['obj']) ? $post['obj'] : '';
+                $observaciones = isset($post['obs']) ? $post['obs'] : '';
+                $servicioRaw = isset($post['serv']) ? $post['serv'] : 'Datos';
 
-            if ($post['validar'] != true) {
-                $titulo = $post['titulo'];
-                $descripcion = $post['desc'];
-                $objetivos = $post['obj'];
-                $observaciones = $post['obs'];
-                $servicio = $post['serv'];
+                $servicio = is_array($servicioRaw) ? implode(', ', $servicioRaw) : (string)$servicioRaw;
 
                 $request = new Solicitudes();
                 $request->IdEmpresa = $idEmpresa;
@@ -73,11 +85,12 @@ class GestionsolicitudController extends ControllerBase
                 $request->Observaciones = $observaciones;
                 $request->Servicio = $servicio;
                 $request->titulo = $titulo;
+                $request->created_at = date('Y-m-d H:i:s');
                 
                 if ($request->save() == false) {
                     $this->flash->error("No se pudo guardar la solicitud");
                 } else {
-                    $this->flash->success('Se guardo la solicitud exitosamente');
+                    $this->flash->success('Se guardo la solicitud exitosamente. Proceda a configurar los niveles fisicos.');
                     $this->session->set("id_empresa", $idEmpresa);
                     return $this->response->redirect("empresa/newpiso");
                 }

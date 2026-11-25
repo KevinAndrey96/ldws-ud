@@ -54,7 +54,9 @@ class SecurityPlugin extends Plugin
 				'empresa'      => ['index', 'new', 'newpiso', 'newlogico'],
 				'gestionusuario' => ['index', 'new'],
 				'grafica' => ['index','grafica'],
-				'gestionsolicitud' => ['index', 'new']
+				'gestionsolicitud' => ['index', 'new'],
+				'gestionequipos' => ['index', 'detalle'],
+				'verreportes' => ['index', 'exportar']
 			];
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);

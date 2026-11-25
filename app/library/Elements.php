@@ -5,7 +5,8 @@ use Phalcon\Mvc\User\Component;
 /**
  * Elements
  *
- * Helps to build UI elements for the application
+ * Generador de elementos UI y barras de navegacion
+ * Universidad Distrital Francisco Jose de Caldas - LDWS
  */
 class Elements extends Component
 {
@@ -15,96 +16,100 @@ class Elements extends Component
                 'caption' => 'Inicio',
                 'action' => 'index'
             ],
-            /*'invoices' => [
-                'caption' => 'Invoices',
-                'action' => 'index'
-            ],*/
-            /*'prueba' => [
-                'caption' => 'Prueba',
-                'action' => 'index'
-            ],*/
-            /*'contact' => [
-                'caption' => 'Contact',
-                'action' => 'index'
-            ],*/
-            'gestionusuario' => [
-                'caption' => 'Gestión de Usuarios',
+            'empresa' => [
+                'caption' => 'Empresa',
                 'action' => 'index'
             ],
             'gestionsolicitud' => [
-                'caption' => 'Gestión de Solicitudes',
+                'caption' => 'Solicitudes',
+                'action' => 'index'
+            ],
+            'grafica' => [
+                'caption' => 'Pisos y Topologia',
                 'action' => 'index'
             ],
             'gestionequipos' => [
-                'caption' => 'Gestión de Equipos',
+                'caption' => 'Equipos',
                 'action' => 'index'
             ],
             'verreportes' => [
-                'caption' => 'Ver Reportes',
+                'caption' => 'Reporte Tecnico',
+                'action' => 'index'
+            ],
+            'gestionusuario' => [
+                'caption' => 'Usuarios',
                 'action' => 'index'
             ],
         ],
         'navbar-right' => [
             'session' => [
-                'caption' => 'Ingresar/Registrarse',
+                'caption' => 'Ingresar / Registro',
                 'action' => 'index'
             ],
         ]
     ];
 
     private $_tabs = [
-        /*'Invoices' => [
-            'controller' => 'invoices',
+        'Empresa' => [
+            'controller' => 'empresa',
             'action' => 'index',
             'any' => false
-        ],*/
+        ],
         'Solicitudes' => [
-                'controller' => 'gestionsolicitud',
-                'action' => 'index',
-                'any' => false
-        ],/*
-        'Companies' => [
-            'controller' => 'companies',
+            'controller' => 'gestionsolicitud',
             'action' => 'index',
-            'any' => true
+            'any' => false
         ],
-        'Products' => [
-            'controller' => 'products',
-            'action' => 'index',
-            'any' => true
+        'Pisos' => [
+            'controller' => 'empresa',
+            'action' => 'newpiso',
+            'any' => false
         ],
-        'Product Types' => [
-            'controller' => 'producttypes',
+        'Logico' => [
+            'controller' => 'empresa',
+            'action' => 'newlogico',
+            'any' => false
+        ],
+        'Topologia' => [
+            'controller' => 'grafica',
             'action' => 'index',
-            'any' => true
-        ],*/
-        'Perfil' => [
-            'controller' => 'invoices',
-            'action' => 'profile',
+            'any' => false
+        ],
+        'Equipos' => [
+            'controller' => 'gestionequipos',
+            'action' => 'index',
+            'any' => false
+        ],
+        'Reporte' => [
+            'controller' => 'verreportes',
+            'action' => 'index',
+            'any' => false
+        ],
+        'Usuarios' => [
+            'controller' => 'gestionusuario',
+            'action' => 'index',
             'any' => false
         ]
     ];
 
     /**
-     * Builds header menu with left and right items
-     *
-     * @return string
+     * Construye el menu de cabecera con opciones publicas y privadas
      */
     public function getMenu()
     {
-
         $auth = $this->session->get('auth');
         if ($auth) {
             $this->_headerMenu['navbar-right']['session'] = [
-                'caption' => 'Cerrar Sesión',
+                'caption' => 'Cerrar Sesion (' . $this->session->get('name') . ')',
                 'action' => 'end'
             ];
         } else {
-            unset($this->_headerMenu['navbar-left']['invoices']);
-            unset($this->_headerMenu['navbar-left']['gestionusuario']);
+            unset($this->_headerMenu['navbar-left']['empresa']);
             unset($this->_headerMenu['navbar-left']['gestionsolicitud']);
+            unset($this->_headerMenu['navbar-left']['grafica']);
             unset($this->_headerMenu['navbar-left']['gestionequipos']);
             unset($this->_headerMenu['navbar-left']['verreportes']);
+            unset($this->_headerMenu['navbar-left']['gestionusuario']);
         }
 
         $controllerName = $this->view->getControllerName();
@@ -123,11 +128,10 @@ class Elements extends Component
             echo '</ul>';
             echo '</div>';
         }
-
     }
 
     /**
-     * Returns menu tabs
+     * Retorna las pestañas de navegacion
      */
     public function getTabs()
     {
