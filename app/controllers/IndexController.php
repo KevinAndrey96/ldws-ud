@@ -4,15 +4,23 @@ class IndexController extends ControllerBase
 {
     public function initialize()
     {
-        $this->tag->setTitle('Welcome');
+        $this->tag->setTitle('Bienvenido');
         parent::initialize();
     }
 
     public function indexAction()
     {
         if (!$this->request->isPost()) {
-            $this->flash->notice('This is a sample application of the Phalcon Framework.
-                Please don\'t provide us any personal information. Thanks');
+            $this->flash->notice('Bienvenido al sistema LDWS');
         }
+          /*
+        if ($this->session->has("auth")->user->name) {
+            $name = $this->session->get("auth")->user->name;
+            $this->view->name = $name;
+        }else
+        {
+            $name="Yaper";
+            $this->view->name = $name;
+        }*/
     }
 }

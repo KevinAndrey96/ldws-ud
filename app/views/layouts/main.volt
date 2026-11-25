@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">INVO</a>
+            <a class="navbar-brand" href="#">LDWS-UD</a>
         </div>
         {{ elements.getMenu() }}
     </div>
@@ -18,6 +18,6 @@
     {{ content() }}
     <hr>
     <footer>
-        <p>&copy; Company 2017</p>
+        <p>&copy; LDWS 2018</p>
     </footer>
 </div>

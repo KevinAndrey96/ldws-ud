@@ -1,13 +1,24 @@
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous">{{ link_to("gestionsolicitud", "Volver") }}</li>
+        </ul>
+    </nav>
+</div>
+
+
 <div class="page-header">
-    <h2 align="center">CREAR SOLICITUD</h2>
+    <h2>Solicitud</h2>
 </div>
 
 <p>
 Bienvenido al módulo de solicitudes, aquí podrá iniciar el proceso de solicitud para su empresa
 </p>
 {{ form("gestionsolicitud/new", "method":"post") }}
-	<label>Codigo empresa</label>
-	<input type="text" placeholder="Codigo de la empresa"  class="form-control" name="empresa">
+	<input type="hidden" name="IdEmpresa" value="{{ idempresa }}">
+
+	<label>Titulo</label>
+	<input type="text" class="form-control" placeholder="Titulo" name="titulo">
 
 	<label>Descripción</label>
 	<textarea class="form-control" placeholder="Descripción" name="desc"></textarea>
@@ -19,9 +30,22 @@ Bienvenido al módulo de solicitudes, aquí podrá iniciar el proceso de solicit
 	<textarea class="form-control" placeholder="Observaciones" name="obs"></textarea>
 
 	<label>Servicios necesarios</label>
-	<select class="form-control" placeholder="Servicios Necesarios" name="serv" >
-		<option>test</option>
+	<select class="form-control" placeholder="Servicios Necesarios" name="serv" multiple>
+	  <option value="web">WEB</option>
+	  <option value="bd">BD</option>
+	  <option value="aplicaciones">APLICACIONES</option>
+	  <option value="proxi">PROXI</option>
+	  <option value="voip">VOIP</option>
+	  <option value="video">VIDEO CONFERENCIA</option>
+	  <option value="correo">CORREO</option>
+	  <option value="dir_activo">DIRECTORIO ACTIVO</option>
+	  <option value="dhcp">DHCP</option>
+	  <option value="dna">DNS</option>
+	  <option value="ftp">FTP</option>
+	  <option value="encapsulamiento">ENCAPSULAMIENTO</option>
+	  <option value="redundancia">REDUNDANCIA</option>
 	</select>
+	<p style="font-size:10px">*Mantenga presionado Ctrl (windows) / Command (Mac) para seleccionar varias opciones.</p>
 	
 	<br>
 	<center>{{ submit_button("Guardar", "class": "btn btn-success") }}</center>

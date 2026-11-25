@@ -9,7 +9,7 @@ class RegisterController extends ControllerBase
 {
     public function initialize()
     {
-        $this->tag->setTitle('Sign Up/Sign In');
+        $this->tag->setTitle('Registro');
         parent::initialize();
     }
 
@@ -51,7 +51,7 @@ class RegisterController extends ControllerBase
             } else {
                 $this->tag->setDefault('email', '');
                 $this->tag->setDefault('password', '');
-                $this->flash->success('Thanks for sign-up, please log-in to start generating invoices');
+                $this->flash->success('Gracias por registrarse, por favor inicie sesión');
 
                 return $this->dispatcher->forward(
                     [
