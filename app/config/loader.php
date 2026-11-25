@@ -14,6 +14,10 @@ $loader->registerDirs([
 ])->register();
 
 $loader->registerClasses([
-    'Services' => APP_PATH . 'app/Services.php'
+    'Services' => APP_PATH . 'app/Services.php',
+    'GestionusuarioController' => APP_PATH . $config->application->controllersDir . 'GestionUsuarioController.php',
+    'GestionUsuarioController' => APP_PATH . $config->application->controllersDir . 'GestionUsuarioController.php',
+    'GestionsolicitudController' => APP_PATH . $config->application->controllersDir . 'GestionSolicitudController.php',
+    'GestionSolicitudController' => APP_PATH . $config->application->controllersDir . 'GestionSolicitudController.php',
 ]);
 

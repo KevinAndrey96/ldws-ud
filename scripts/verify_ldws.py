@@ -37,7 +37,7 @@ def test_project_structure():
         "app/controllers/GraficaController.php",
         "app/controllers/GestionequiposController.php",
         "app/controllers/VerreportesController.php",
-        "app/controllers/GestionusuarioController.php",
+        "app/controllers/GestionUsuarioController.php",
         "app/models/Users.php",
         "app/models/Empresas.php",
         "app/models/Solicitudes.php",

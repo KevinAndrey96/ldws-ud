@@ -59,12 +59,12 @@ jobs:
 
       - name: Import Relational Schema & Seeds
         run: |
-          mariadb -h 127.0.0.1 -u root -proot_pass ldwsud_base < schemas/ldws_ud.sql
+          mysql -h 127.0.0.1 -u root -proot_pass ldwsud_base < schemas/ldws_ud.sql
 
       - name: Verify Table Counts and Integrity
         run: |
-          mariadb -h 127.0.0.1 -u root -proot_pass -e "SELECT table_name, table_rows FROM information_schema.tables WHERE table_schema='ldwsud_base';"
-          mariadb -h 127.0.0.1 -u root -proot_pass -e "SELECT COUNT(*) AS total_users FROM ldwsud_base.users; SELECT COUNT(*) AS total_pisos FROM ldwsud_base.pisos; SELECT COUNT(*) AS total_equipos FROM ldwsud_base.equipos;"
+          mysql -h 127.0.0.1 -u root -proot_pass -e "SELECT table_name, table_rows FROM information_schema.tables WHERE table_schema='ldwsud_base';"
+          mysql -h 127.0.0.1 -u root -proot_pass -e "SELECT COUNT(*) AS total_users FROM ldwsud_base.users; SELECT COUNT(*) AS total_pisos FROM ldwsud_base.pisos; SELECT COUNT(*) AS total_equipos FROM ldwsud_base.equipos;"
 
   docker-validation:
     name: Docker Containerization Build
