@@ -181,7 +181,7 @@ erDiagram
 
 ## Generacion Automatizada de Scripts Cisco IOS
 
-El motor [Logico.php](file:///Users/kevinandrey/Documents/Kevin/github/ldws-ud/app/models/Logico.php) sintetiza dinamicamente el codigo de configuracion para la puesta en marcha de los conmutadores y enrutadores:
+El motor [Logico.php](app/models/Logico.php) sintetiza dinamicamente el codigo de configuracion para la puesta en marcha de los conmutadores y enrutadores:
 
 ### Ejemplo de Configuracion para Switch de Acceso:
 ```cisco
@@ -248,7 +248,7 @@ docker compose up -d --build
 
 ## Verificacion de Calidad y Pruebas Arquitectonicas
 
-El repositorio incluye una suite automatizada de verificacion escrita en Python ([scripts/verify_ldws.py](file:///Users/kevinandrey/Documents/Kevin/github/ldws-ud/scripts/verify_ldws.py)) que valida 7 areas criticas:
+El repositorio incluye una suite automatizada de verificacion escrita en Python ([scripts/verify_ldws.py](scripts/verify_ldws.py)) que valida 7 areas criticas:
 
 ```bash
 python scripts/verify_ldws.py
@@ -325,5 +325,5 @@ Resultados de la suite:
 ## Creditos y Reconocimientos
 
 - **Universidad Distrital Francisco Jose de Caldas:** Facultad de Ingenieria, Proyecto Curricular de Ingenieria de Sistemas / Telecomunicaciones.
-- **Autores:** Kevin Andrey Martinez Cardenas, Viviana Alvarez.
+- **Autor:** Kevin Andrey Herrera Silva.
 - **Licencia:** MIT License.
